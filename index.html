@@ -1,272 +1,627 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dúvidas Frequentes sobre Indenizações – DRM Equipamentos</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal – Conteúdo</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
-      background: #ffffff;
-      color: #111111;
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 16px;
-      line-height: 1.75;
-      padding: 48px 24px;
-    }
+  :root {
+    --navy: #00224d;
+    --orange: #d48200;
+    --white: #ffffff;
+    --bg: #f4f4f0;
+    --border: #ddddd8;
+    --text: #1a1a1a;
+    --muted: #666660;
+    --font: 'Consolas', 'Courier New', monospace;
+  }
 
-    .container {
-      max-width: 780px;
-      margin: 0 auto;
-    }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    padding: 28px 32px;
+  }
 
-    .intro {
-      font-size: 15px;
-      margin-bottom: 36px;
-      color: #333;
-      font-style: italic;
-    }
+  /* ── COMUNICADO DESTAQUE ── */
+  .comunicado {
+    background: var(--navy);
+    border-radius: 4px;
+    padding: 18px 22px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    margin-bottom: 32px;
+  }
 
-    h1 {
-      font-family: 'Trebuchet MS', Helvetica, sans-serif;
-      font-size: 22px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      border-bottom: 2px solid #111;
-      padding-bottom: 10px;
-      margin-bottom: 40px;
-    }
+  .comunicado-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--orange);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+  }
 
-    .faq-item {
-      margin-bottom: 36px;
-    }
+  .comunicado-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 4px;
+  }
 
-    .faq-question {
-      font-family: 'Trebuchet MS', Helvetica, sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 10px;
-      color: #111;
-    }
+  .comunicado-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 5px;
+  }
 
-    .faq-question .num {
-      display: inline-block;
-      margin-right: 6px;
-    }
+  .comunicado-text {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+  }
 
-    .faq-answer {
-      font-size: 15px;
-      color: #222;
-    }
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
 
-    .faq-answer p {
-      margin-bottom: 10px;
-    }
+  .section-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 2px;
+  }
 
-    .faq-answer ol,
-    .faq-answer ul {
-      margin: 10px 0 10px 24px;
-    }
+  .tag-navy  { background: var(--navy);   color: #fff; }
+  .tag-orange{ background: var(--orange); color: #fff; }
+  .tag-out   { background: transparent;   color: var(--navy); border: 1px solid var(--navy); }
 
-    .faq-answer li {
-      margin-bottom: 6px;
-    }
+  .section-line  { flex: 1; height: 1px; background: var(--border); }
+  .section-count { font-size: 11px; color: var(--muted); }
 
-    .faq-answer strong {
-      font-weight: 700;
-    }
+  .section { margin-bottom: 36px; }
 
-    .contact {
-      margin-top: 48px;
-      padding-top: 20px;
-      border-top: 1px solid #ccc;
-      font-size: 14px;
-      color: #444;
-    }
+  /* ── CARDS GRID ── */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
 
-    .contact a {
-      color: #111;
-      font-weight: 700;
-    }
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px 18px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.15s;
+  }
 
-    .closing {
-      margin-top: 8px;
-      font-style: italic;
-    }
-  </style>
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--navy);
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  .card:hover { border-color: var(--navy); }
+  .card:hover::before { opacity: 1; }
+  .card.accent-orange:hover { border-color: var(--orange); }
+  .card.accent-orange::before { background: var(--orange); }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .badge {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 2px;
+  }
+
+  .badge-info  { background: #e2eaf8; color: #00224d; }
+  .badge-warn  { background: #fff3df; color: #7a4a00; }
+  .badge-guide { background: #e6f0e6; color: #1a4a1a; }
+
+  .card-date  { font-size: 10px; color: var(--muted); }
+  .card-title { font-size: 13px; font-weight: 700; color: var(--text);  margin-bottom: 7px; line-height: 1.4; }
+  .card-text  { font-size: 12px; color: var(--muted); line-height: 1.65; }
+
+  .card-link {
+    display: inline-block;
+    margin-top: 11px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px solid var(--navy);
+    padding-bottom: 1px;
+    transition: color 0.15s, border-color 0.15s;
+    cursor: pointer;
+  }
+
+  .card-link:hover { color: var(--orange); border-color: var(--orange); }
+
+  /* ── FAQ ── */
+  .faq-wrap {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-item:last-child { border-bottom: none; }
+
+  .faq-q {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 13px 18px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.45;
+    user-select: none;
+    transition: background 0.12s;
+  }
+
+  .faq-q:hover { background: var(--bg); }
+  .faq-item.open .faq-q { color: var(--navy); background: #f0f4fa; }
+
+  .faq-chevron {
+    font-size: 11px;
+    color: var(--muted);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--navy); }
+
+  .faq-a {
+    display: none;
+    padding: 0 18px 14px 18px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.75;
+    border-top: 1px solid var(--border);
+  }
+
+  .faq-item.open .faq-a { display: block; }
+
+  .faq-a ul { margin: 8px 0 6px 18px; }
+  .faq-a li { margin-bottom: 4px; }
+  .faq-a strong { color: var(--text); }
+
+  /* ── GUIA CARDS (dicas estilo numbered) ── */
+  .guia-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+
+  .guia-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px 18px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    transition: border-color 0.15s;
+  }
+
+  .guia-card:hover { border-color: var(--orange); }
+
+  .guia-num {
+    width: 30px; height: 30px;
+    border-radius: 2px;
+    background: var(--orange);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .guia-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 5px; }
+  .guia-text  { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+  /* ── CONTATO ── */
+  .contato-bar {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .contato-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .contato-item strong { color: var(--text); }
+
+  .contato-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--border);
+    flex-shrink: 0;
+  }
+
+  /* ── MODAL OVERLAY ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--white);
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    max-width: 640px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--white);
+  }
+
+  .modal-title { font-size: 13px; font-weight: 700; color: var(--navy); line-height: 1.4; }
+  .modal-date  { font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+  .modal-close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    transition: color 0.1s;
+  }
+
+  .modal-close:hover { color: var(--text); }
+
+  .modal-body {
+    padding: 18px 20px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .modal-body p { margin-bottom: 10px; }
+  .modal-body ul { margin: 8px 0 10px 18px; }
+  .modal-body li { margin-bottom: 5px; }
+  .modal-body strong { color: var(--text); }
+
+  .modal-body h4 {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 14px 0 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+</style>
 </head>
 <body>
-  <div class="container">
 
-    <p class="intro">Acreditamos que algumas das respostas abaixo poderão sanar suas dúvidas em relação ao processo de indenização. Não deixe de conferir!</p>
+<!-- COMUNICADO -->
+<div class="comunicado">
+  <div class="comunicado-icon">&#9888;</div>
+  <div>
+    <div class="comunicado-label">Atenção</div>
+    <div class="comunicado-title">Conferência de peças é responsabilidade do locatário</div>
+    <div class="comunicado-text">A conferência deve ser realizada tanto na entrega quanto na devolução. Em caso de ausência de conferente, a DRM registra o saldo e disponibiliza relatório — o cliente não poderá questionar o processo. Dúvidas: faturamento@drmequipamentos.com.br</div>
+  </div>
+</div>
 
-    <h1>Dúvidas Frequentes sobre Indenização</h1>
+<!-- FAQ INDENIZAÇÕES -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag tag-navy">Dúvidas Frequentes</div>
+    <div class="section-line"></div>
+    <div class="section-count">14 perguntas</div>
+  </div>
 
-    <!-- 1 -->
+  <div class="faq-wrap">
+
     <div class="faq-item">
-      <p class="faq-question"><span class="num">1.</span> O que é indenização?</p>
-      <div class="faq-answer">
-        <p>Indenização é um valor a ser pago à DRM, mediante alguma situação na qual suas peças, provenientes de locação, sofreram danos no processo do contrato. Assim, a indenização é uma forma legal de compensar a DRM por um dano sofrido. O objetivo é reparar o prejuízo e garantir que a pessoa prejudicada não saia no prejuízo. A indenização é estabelecida por meio de contrato e acordos entre a DRM e o cliente.</p>
+      <div class="faq-q" onclick="toggleFaq(this)">
+        O que é indenização?
+        <span class="faq-chevron">&#9660;</span>
+      </div>
+      <div class="faq-a">
+        Indenização é um valor a ser pago à DRM quando peças provenientes de locação sofreram danos durante o contrato. É uma forma legal de compensar a DRM pelo prejuízo sofrido, estabelecida por meio de contrato entre as partes.
       </div>
     </div>
 
-    <!-- 2 -->
     <div class="faq-item">
-      <p class="faq-question"><span class="num">2.</span> Quais são os tipos de indenizações?</p>
-      <div class="faq-answer">
-        <p>Conforme contrato, a DRM pode solicitar indenizações por três tipos:</p>
-        <ol>
-          <li><strong>Por avaria:</strong> que consiste em danificações nas peças, podendo ser componentes de peças faltantes, rachaduras, amassos, rompimentos, etc., na qual resulta em custos com manutenção ou, ainda, em peças irrecuperáveis, quando sua estrutura não for mais suficiente para ser utilizada. Neste último caso (peça irrecuperável), o cliente poderá realizar a retirada da peça na DRM para seu destino próprio.</li>
-          <li><strong>Por limpeza:</strong> que consiste em tornar a peça utilizável e funcional, resultando em custos com lavagem e retirada de crostas superficiais.</li>
-          <li><strong>Por extravio:</strong> que consiste na perda da peça locada, visto que resultará em custos de reposição (fabricação) dessas peças.</li>
-        </ol>
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Quais são os tipos de indenização?
+        <span class="faq-chevron">&#9660;</span>
       </div>
-    </div>
-
-    <!-- 3 -->
-    <div class="faq-item">
-      <p class="faq-question"><span class="num">3.</span> É comum haver indenizações de peças?</p>
-      <div class="faq-answer">
-        <p>Sim. A indenização é uma espécie de reparação ao patrimônio da empresa. O setor de locação de equipamentos para construção civil apresenta este fato muito comum em suas atividades. De acordo com levantamento de dados da ABRASFE (2024), é comum haver indenizações neste ramo de negócio, podendo variar de 1% até mais de 5% do faturamento das empresas pesquisadas no setor.</p>
-      </div>
-    </div>
-
-    <!-- 4 -->
-    <div class="faq-item">
-      <p class="faq-question"><span class="num">4.</span> O que são "sobras" de peças?</p>
-      <div class="faq-answer">
-        <p>Em casos eventuais, podem ocorrer sobras de peças, que consiste em uma peça que foi alugada e utilizada pela obra, porém não houve sua saída e controle pelo sistema da DRM. Portanto, quando essa peça é devolvida pelo cliente, não haverá saldo para abatimento da mesma, o que implica em realizar compensação em outros tipos de peças que possam estar com saldo "devedor" pelo cliente.</p>
-      </div>
-    </div>
-
-    <!-- 5 -->
-    <div class="faq-item">
-      <p class="faq-question"><span class="num">5.</span> Qual o impacto de "sobras" de peças nas indenizações?</p>
-      <div class="faq-answer">
-        <p>A ocorrência de sobras de peças não é desejável por ambas as partes, porém é passível de ocorrer. Nestes casos, peças identificadas como sobras poderão ser compensadas em saldos de outros tipos de peças com saldo devedor pelo cliente, reduzindo o valor de indenização a pagar, se for o caso. Estas sobras, quando ocorridas, serão informadas pelo cliente, bem como seu abatimento, cuja compensação é feita em outro tipo de peça que possua o mesmo peso da peça que foi extraviada em obra.</p>
-      </div>
-    </div>
-
-    <!-- 6 -->
-    <div class="faq-item">
-      <p class="faq-question"><span class="num">6.</span> Qual a importância da conferência adequada das peças pelo cliente?</p>
-      <div class="faq-answer">
-        <p>A conferência das peças pelo cliente é de extrema importância. Esta conferência necessita ser realizada tanto na entrega quanto na devolução de peças. Esta conferência ajuda a:</p>
-        <ol>
-          <li>Detectar imediatamente quantidades de peças faltantes ou adicionais, conforme relatórios fornecidos pela DRM;</li>
-          <li>Detectar peças fora de especificações solicitadas para o andamento da obra;</li>
-          <li>Estabelecer confiança, parceria e transparência na tramitação de materiais entre DRM e cliente;</li>
-          <li>Corrigir e ajustar, no ato, questões identificadas com as peças, não deixando pendências e processos mal resolvidos, na qual em outro momento será complexo compreender a situação.</li>
-        </ol>
-        <p>Esta conferência deve ser realizada por pessoa responsável e designada pelo cliente no início da obra, que possua capacitação e disponibilidade para todas as conferências de entrega e devolução de peças.</p>
-      </div>
-    </div>
-
-    <!-- 7 -->
-    <div class="faq-item">
-      <p class="faq-question"><span class="num">7.</span> Como é o procedimento para conferência das peças?</p>
-      <div class="faq-answer">
-        <p>A DRM possui conferentes próprios em seu quadro de funcionários, devidamente capacitados para a função.</p>
-        <p><strong>1. Conferência na entrega:</strong><br>
-        Os conferentes da DRM, ao receber a demanda solicitada pelo cliente, irão realizar a separação do material do estoque, após os materiais serem submetidos à inspeção de segurança e qualidade. Nesta fase, haverá duas etapas de conferência: 1) ocorre a contagem das peças após a separação do material para o cliente, identificando o nome do cliente no material separado; e 2) ocorre em conjunto com o conferente disponibilizado pelo cliente para averiguar e confirmar os dados. Todas as informações são registradas e fotografadas.</p>
-        <p><strong>2. Conferência na devolução:</strong><br>
-        O cliente carregará o veículo/frete e encaminhará as peças para o pátio da DRM. Nesta fase, haverá duas etapas de conferência: 1) ao chegar a carga, os conferentes da DRM descarregam o veículo/frete no pátio, contabilizando os itens devolvidos; e 2) verificação e confirmação das informações pelo conferente do cliente, realizando os devidos registros e fotografias das peças devolvidas.</p>
-        <p>O pátio da DRM é monitorado por câmeras, sendo possível averiguar as movimentações de materiais. As informações tramitadas são disponibilizadas para o cliente em seguida, para que possa visualizar o controle. Quaisquer divergências serão resolvidas no ato.</p>
-      </div>
-    </div>
-
-    <!-- 8 -->
-    <div class="faq-item">
-      <p class="faq-question"><span class="num">8.</span> Caso não consiga enviar um conferente, como se dará o processo?</p>
-      <div class="faq-answer">
-        <p>É de extrema importância o envio do conferente designado pelo cliente. No entanto, em caso de impossibilidade de comparecimento de conferente, a DRM disponibilizará um relatório com os saldos e fotografias das peças entregues/devolvidas para o cliente, devendo este aceitar o controle e registros realizados pela DRM, não podendo questionar o processo. Além disso, um termo de ausência de conferência será disponibilizado pela DRM para assinatura do cliente.</p>
-      </div>
-    </div>
-
-    <!-- 9 -->
-    <div class="faq-item">
-      <p class="faq-question"><span class="num">9.</span> Como é calculado o valor da indenização?</p>
-      <div class="faq-answer">
-        <p>No momento do fechamento de contrato, o cliente receberá uma tabela anexa ao contrato com os valores das indenizações para cada tipo de peça. Esta tabela é atualizada, anualmente, por meio do índice IGP-M. Esta tabela é aplicada para os casos em que o cliente apresente extravios de peça (verificar pergunta 2, item 3) ou peças irrecuperáveis.</p>
-        <p>Em caso de extravio e peças irrecuperáveis, os custos para reposição são compostos pelo seguinte cálculo: custo de uma peça nova (material) + custos de fabricação + impostos aplicáveis. As peças alugadas pela DRM são de fabricação própria, logo, os custos envolvidos se referem não somente ao preço médio de mercado de uma peça nova, mas também envolvem os custos rateados da estrutura fabril para fabricar as peças (custos diretos e indiretos), além disso, considera-se o tempo e aluguel perdido que a DRM deixou de locar as peças extraviadas para outros clientes.</p>
-      </div>
-    </div>
-
-    <!-- 10 -->
-    <div class="faq-item">
-      <p class="faq-question"><span class="num">10.</span> Como é feito o pagamento das indenizações?</p>
-      <div class="faq-answer">
-        <p>O pagamento das indenizações pode ser realizado das seguintes formas, dependendo do caso:</p>
+      <div class="faq-a">
+        A DRM pode solicitar indenizações por três tipos:
         <ul>
-          <li><strong>Avaria (manutenção e limpeza):</strong> será analisado caso a caso, dependendo dos critérios verificados. Este pagamento deve ser realizado após devolução e identificação da avaria da peça.</li>
-          <li><strong>Peça irrecuperável:</strong> utiliza-se o valor da tabela de indenização firmada em contrato. Este pagamento deve ser realizado após devolução e identificação da avaria da peça.</li>
-          <li><strong>Por extravio:</strong> utiliza-se o valor da tabela de indenização firmada em contrato. Este pagamento deve ser realizado após a conclusão da obra e devolução total dos materiais. Com isso, será possível apurar o saldo devedor e seu valor indenizatório para que o contrato seja concluído.</li>
+          <li><strong>Avaria:</strong> danos nas peças (componentes faltantes, rachaduras, amassos, rompimentos), resultando em custos de manutenção ou peça irrecuperável.</li>
+          <li><strong>Limpeza:</strong> custos com lavagem e retirada de crostas para tornar a peça utilizável.</li>
+          <li><strong>Extravio:</strong> perda da peça locada, gerando custos de reposição (fabricação).</li>
         </ul>
       </div>
     </div>
 
-    <!-- 11 -->
     <div class="faq-item">
-      <p class="faq-question"><span class="num">11.</span> Por que o preço da indenização por peça irrecuperável e por extravio corresponde a uma peça nova, sendo que recebi uma peça já utilizada?</p>
-      <div class="faq-answer">
-        <p>Qualquer peça, em questão, possui uma finalidade e função, seja ela fabricada recentemente ou reutilizada. Independentemente da situação, a finalidade que a peça desempenha na obra é a mesma, cujos preços de alugueis também são os mesmos. Portanto, peças irrecuperáveis e extraviadas são custosas da mesma forma, visto que sua utilidade não será mais possível. Para reparar estas "perdas", arca-se com custo de produção de uma peça nova, como pode ser melhor detalhado na pergunta 9.</p>
+      <div class="faq-q" onclick="toggleFaq(this)">
+        É comum haver indenizações de peças?
+        <span class="faq-chevron">&#9660;</span>
+      </div>
+      <div class="faq-a">
+        Sim. Conforme levantamento da ABRASFE (2024), é muito comum no setor de locação de equipamentos para construção civil, podendo variar de 1% até mais de 5% do faturamento das empresas do setor.
       </div>
     </div>
 
-    <!-- 12 -->
     <div class="faq-item">
-      <p class="faq-question"><span class="num">12.</span> É possível extraviar materiais (e de grandes dimensões) em obra?</p>
-      <div class="faq-answer">
-        <p>Sim. Seja uma peça de pequena ou grande dimensão, é possível seu extravio em obra. A obra é um ambiente agitado, cheio de "esconderijos", na qual pode abrigar peças, além de muitas pessoas movimentando materiais o tempo todo. Com essa dinâmica, a probabilidade de sumir peças é considerável.</p>
-        <p><strong>Ranking de equipamentos que somem do canteiro de obra sem ninguém perceber (furtos e desvios), conforme dados da ABRASFE (2024):</strong></p>
-        <ol>
-          <li>Ferramentas elétricas (furadeiras, serras circulares, lixadeiras, etc.);</li>
-          <li>Cobre e outros metais (cabos elétricos, tubulações de cobre, etc.);</li>
-          <li>Equipamentos de construção pesados (geradores, compressores, escavadeiras);</li>
-          <li>Materiais de acabamento (luminárias, torneiras, maçanetas, espelhos, etc.);</li>
-          <li>Ferramentas manuais (martelos, chaves de fenda, alicates, etc.);</li>
-          <li>Escoramento e andaimes de locação (andaimes, escoras metálicas, sapatas, vigas, etc.);</li>
-          <li>Materiais de construção (tijolos, blocos de concreto, madeira, vergalhões de aço, etc.).</li>
-        </ol>
-        <p><strong>A partir de um estudo histórico de indenizações, peças com grandes dimensões podem ser extraviadas, conforme o ranking realizado pela ABRASFE (2024):</strong></p>
-        <ol>
-          <li>Acessórios de formas;</li>
-          <li>Braçadeiras;</li>
-          <li>Porcas borboletas;</li>
-          <li>Tubo 48;</li>
-          <li>Escoras;</li>
-          <li>Presilhas;</li>
-          <li>Barra de ancoragem;</li>
-          <li>Painel;</li>
-          <li>Sapatas;</li>
-          <li>Vigas.</li>
-        </ol>
+      <div class="faq-q" onclick="toggleFaq(this)">
+        O que são "sobras" de peças e qual seu impacto?
+        <span class="faq-chevron">&#9660;</span>
+      </div>
+      <div class="faq-a">
+        Sobras são peças alugadas e utilizadas pela obra, mas que não tiveram saída registrada no sistema da DRM. Quando devolvidas, não haverá saldo para abatimento. Peças identificadas como sobras podem ser compensadas em saldos de outros tipos de peças com saldo devedor, <strong>reduzindo o valor de indenização a pagar</strong>. A compensação é feita em peças de mesmo peso.
       </div>
     </div>
 
-    <!-- 13 -->
     <div class="faq-item">
-      <p class="faq-question"><span class="num">13.</span> Como posso evitar perda de materiais em obra?</p>
-      <div class="faq-answer">
-        <p>Boas práticas de organização e cuidado com as peças podem ser eficazes contra o extravio de peças em obra. Preparamos um manual exclusivo para que possa lhe guiar nessa jornada de organização e evitar perdas (e indenizações). Basta apontar a câmera do seu celular no QR Code.</p>
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Qual a importância da conferência das peças?
+        <span class="faq-chevron">&#9660;</span>
+      </div>
+      <div class="faq-a">
+        A conferência é essencial e deve ocorrer tanto na entrega quanto na devolução. Ela permite:
+        <ul>
+          <li>Detectar imediatamente quantidades faltantes ou adicionais;</li>
+          <li>Identificar peças fora de especificação;</li>
+          <li>Estabelecer transparência na tramitação de materiais;</li>
+          <li>Corrigir questões no ato, evitando pendências complexas posteriormente.</li>
+        </ul>
+        Deve ser realizada por pessoa responsável e designada pelo cliente no início da obra.
       </div>
     </div>
 
-    <!-- 14 -->
     <div class="faq-item">
-      <p class="faq-question"><span class="num">14.</span> Verifiquei e não tenho mais determinadas peças em obra, porém está sendo cobrado aluguel destas peças. Como posso proceder?</p>
-      <div class="faq-answer">
-        <p>Nestes casos em que se identifique um saldo devedor na qual não há mais tal material em obra para devolução, deve-se solicitar imediatamente a interrupção do aluguel dos equipamentos em questão à DRM, na qual o cliente assume total responsabilidade por este ato. O aluguel será cessado a partir da data da comunicação. Com isso, o saldo parcial devedor da(s) peça(s) identificada(s) deverá ser indenizado imediatamente à DRM, conforme tabela.</p>
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Como funciona o procedimento de conferência?
+        <span class="faq-chevron">&#9660;</span>
+      </div>
+      <div class="faq-a">
+        <strong>Na entrega:</strong> os conferentes da DRM separam e contam o material, com registro fotográfico, em conjunto com o conferente do cliente.<br><br>
+        <strong>Na devolução:</strong> o cliente envia as peças ao pátio da DRM, onde são descarregadas, contabilizadas e conferidas com o representante do cliente. O pátio é monitorado por câmeras. Divergências são resolvidas no ato.
       </div>
     </div>
 
-    <div class="contact">
-      <p class="closing">Conte com a gente!</p>
-      <p>Outras dúvidas sobre indenização, mande um e-mail para <a href="mailto:faturamento@drmequipamentos.com.br">faturamento@drmequipamentos.com.br</a></p>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        O que acontece se não puder enviar um conferente?
+        <span class="faq-chevron">&#9660;</span>
+      </div>
+      <div class="faq-a">
+        A DRM disponibilizará relatório com saldos e fotografias das peças entregues/devolvidas. O cliente deverá aceitar os registros realizados pela DRM, não podendo questionar o processo. Um <strong>termo de ausência de conferência</strong> será disponibilizado para assinatura.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Como é calculado o valor da indenização?
+        <span class="faq-chevron">&#9660;</span>
+      </div>
+      <div class="faq-a">
+        No fechamento do contrato, o cliente recebe uma tabela com os valores por tipo de peça — atualizada anualmente pelo <strong>IGP-M</strong>. O cálculo para extravio e peças irrecuperáveis considera:<br><br>
+        <strong>Custo de peça nova (material) + custos de fabricação + impostos</strong><br><br>
+        Como as peças são de fabricação própria, os custos incluem estrutura fabril, custos diretos e indiretos, além do tempo e aluguel perdido enquanto a peça estava extraviada.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Como é feito o pagamento das indenizações?
+        <span class="faq-chevron">&#9660;</span>
+      </div>
+      <div class="faq-a">
+        <ul>
+          <li><strong>Avaria (manutenção e limpeza):</strong> analisado caso a caso, após devolução e identificação da avaria.</li>
+          <li><strong>Peça irrecuperável:</strong> valor da tabela de indenização, após devolução e identificação.</li>
+          <li><strong>Extravio:</strong> valor da tabela, após conclusão da obra e devolução total dos materiais, quando é apurado o saldo devedor final.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Por que pago preço de peça nova se recebi uma peça usada?
+        <span class="faq-chevron">&#9660;</span>
+      </div>
+      <div class="faq-a">
+        Independentemente do estado da peça, sua função e finalidade na obra são as mesmas — e os preços de aluguel também. Peças irrecuperáveis ou extraviadas deixam de ser utilizáveis, portanto o custo de reposição equivale à fabricação de uma peça nova, conforme detalhado no cálculo da questão anterior.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        É possível extraviar peças de grandes dimensões em obra?
+        <span class="faq-chevron">&#9660;</span>
+      </div>
+      <div class="faq-a">
+        Sim. A obra é um ambiente com muitos "esconderijos" e grande circulação de pessoas. Conforme dados da ABRASFE (2024), os itens de escoramento e andaimes estão entre os mais extraviados. Os equipamentos mais comuns nesta situação são: acessórios de formas, braçadeiras, porcas borboletas, tubos 48, escoras, presilhas, barras de ancoragem, painéis, sapatas e vigas.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Como posso evitar a perda de materiais em obra?
+        <span class="faq-chevron">&#9660;</span>
+      </div>
+      <div class="faq-a">
+        Boas práticas de organização são eficazes contra o extravio. Consulte o <strong>Manual de Boas Práticas do Locatário</strong> para orientações detalhadas sobre armazenamento, organização e controle de equipamentos.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Estão cobrando aluguel de peças que não tenho mais em obra. Como proceder?
+        <span class="faq-chevron">&#9660;</span>
+      </div>
+      <div class="faq-a">
+        Solicite imediatamente à DRM a <strong>interrupção do aluguel</strong> dos equipamentos identificados — o cliente assume total responsabilidade por este ato. O aluguel será cessado a partir da data da comunicação, e o saldo devedor deverá ser indenizado imediatamente conforme a tabela vigente.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Ainda tenho dúvidas sobre indenização. Com quem falo?
+        <span class="faq-chevron">&#9660;</span>
+      </div>
+      <div class="faq-a">
+        Entre em contato pelo e-mail <strong>faturamento@drmequipamentos.com.br</strong>. Para dúvidas sobre quantitativos, itens ou comprovantes, acione o Setor de Logística: <strong>(44) 9743-0001</strong>.
+      </div>
     </div>
 
   </div>
+</div>
+
+<!-- GUIA DE UTILIZAÇÃO -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag tag-orange">Guia de Utilização</div>
+    <div class="section-line"></div>
+    <div class="section-count">Dashboard de Movimentações e Saldos</div>
+  </div>
+
+  <div class="guia-grid">
+
+    <div class="guia-card">
+      <div class="guia-num">01</div>
+      <div>
+        <div class="guia-title">Filtros e navegação lateral</div>
+        <div class="guia-text">Use os filtros para refinar os dados: <strong>Intervalo</strong> (período), <strong>Contrato</strong> (uma obra pode ter mais de um), <strong>Equipamento</strong>, <strong>Remessa</strong> (código do comprovante) e <strong>Operação</strong> (Remessa / Devolução / Indenização).</div>
+      </div>
+    </div>
+
+    <div class="guia-card">
+      <div class="guia-num">02</div>
+      <div>
+        <div class="guia-title">Visualização em colunas (temporal)</div>
+        <div class="guia-text">Itens na vertical, datas/operações na horizontal. Ideal para acompanhar a evolução das entregas. Clique no ícone abaixo de cada data para acessar o PDF do comprovante. <strong>Limite: 200 colunas</strong> — se faltar datas, ajuste o intervalo.</div>
+      </div>
+    </div>
+
+    <div class="guia-card">
+      <div class="guia-num">03</div>
+      <div>
+        <div class="guia-title">Visualização em linhas (cascata)</div>
+        <div class="guia-text">Datas na vertical, detalhes na horizontal. Clique em "+" ao lado da data para expandir os itens. Clique na quantidade sublinhada para acessar o comprovante. <strong>Sem limite de colunas.</strong></div>
+      </div>
+    </div>
+
+    <div class="guia-card">
+      <div class="guia-num">04</div>
+      <div>
+        <div class="guia-title">Cálculo do saldo em obra</div>
+        <div class="guia-text">O saldo é exibido em destaque (toneladas) e segue a lógica:<br><strong>SALDO = REMESSAS − DEVOLUÇÕES − INDENIZAÇÕES</strong><br>Os valores são recalculados automaticamente ao aplicar qualquer filtro.</div>
+      </div>
+    </div>
+
+    <div class="guia-card">
+      <div class="guia-num">05</div>
+      <div>
+        <div class="guia-title">Atualização dos dados</div>
+        <div class="guia-text">Uma movimentação realizada hoje pode levar <strong>até 5 dias úteis</strong> para ser auditada e constar oficialmente no painel.</div>
+      </div>
+    </div>
+
+    <div class="guia-card accent-orange">
+      <div class="guia-num">&#63;</div>
+      <div>
+        <div class="guia-title">Suporte técnico</div>
+        <div class="guia-text">Dúvidas sobre quantitativos ou comprovantes: <strong>(44) 9743-0001</strong> (Logística).<br>Dúvidas técnicas sobre o sistema BI: <strong>thiago.franca@drmequipamentos.com.br</strong></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CONTATO RODAPÉ -->
+<div class="contato-bar">
+  <div class="contato-item">
+    <span>&#9993;</span>
+    <span><strong>Indenizações:</strong> faturamento@drmequipamentos.com.br</span>
+  </div>
+  <div class="contato-dot"></div>
+  <div class="contato-item">
+    <span>&#128222;</span>
+    <span><strong>Logística:</strong> (44) 9743-0001</span>
+  </div>
+  <div class="contato-dot"></div>
+  <div class="contato-item">
+    <span>&#128222;</span>
+    <span><strong>Suporte BI:</strong> thiago.franca@drmequipamentos.com.br</span>
+  </div>
+</div>
+
+<script>
+  function toggleFaq(el) {
+    el.parentElement.classList.toggle('open');
+  }
+</script>
 </body>
 </html>
